@@ -10,14 +10,21 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.KeyNotFoundException;
 import org.jaudiotagger.tag.Tag;
 
-public class Mp3File extends AudioFile {
+public class Mp3File extends File {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1474248911769075890L;
+	String name;
 	AudioFile af;
 	Tag tag;					Tag originalTag;
 
-  public Mp3File(File file) {
+  public Mp3File(String path) {
+  	super(path);
+  	this.name = path;
   	try {
-  		af = AudioFileIO.read(file);
+  		af = AudioFileIO.read(this);
   		tag = af.getTag();
   		originalTag = af.getTag();
   	} catch (Exception e) {
@@ -90,10 +97,9 @@ public class Mp3File extends AudioFile {
 		}
   }
   
-  public void setTrackTotal(int input) {
+  public void setTrackTotal(String string) {
   	try {
-    	String inputAsString = String.valueOf(input);
-			tag.setField(FieldKey.TRACK_TOTAL, inputAsString);
+			tag.setField(FieldKey.TRACK_TOTAL, string);
 		} catch (KeyNotFoundException | FieldDataInvalidException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,10 +116,9 @@ public class Mp3File extends AudioFile {
 		}
   }
   
-  public void setDiscTotal(int input) {
+  public void setDiscTotal(String string) {
   	try {
-    	String inputAsString = String.valueOf(input);
-			tag.setField(FieldKey.DISC_TOTAL, inputAsString);
+			tag.setField(FieldKey.DISC_TOTAL, string);
 		} catch (KeyNotFoundException | FieldDataInvalidException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,6 +157,7 @@ public class Mp3File extends AudioFile {
    * TAG FUNCTIONS
    *********************/
   public void writeToFile() {
+  	System.out.println("Writing file" + name);
   	af.setTag(tag);
   	try {
 			af.commit();

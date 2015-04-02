@@ -2,6 +2,7 @@ package tasks;
 
 import java.io.File;
 
+import log.SystemOut;
 import files.Mp3Folder;
 
 public class Task {
@@ -9,16 +10,43 @@ public class Task {
 	//TODO: uuid
 	Mp3Folder folder;
 	String name;
+	String description;
 	String path;
 	int id;
+	int status;
+	
+	enum Status {
+		CREATED("Created"),
+		QUEUED("Queued"),
+		RUNNING("In Progress"),
+		FINISHED("Finished");
+		
+		private String statusDescription;
+		
+		Status(String statusDescription) {
+			this.statusDescription = statusDescription;
+		}
+	}
 
 	public Task(Mp3Folder f) {
 		this.folder = f;
 		this.path = folder.getPath();
+		SystemOut.printDebug("Created Task " + this.getClass());
+		SystemOut.printDebug("Path: " + this.path);
 	}
 
 	public void run() {
-		
+		System.out.println("Running " + this.name);
+		this.runTask();
+		finish();
+	}
+	
+	protected void runTask() {
+
+	}
+	
+	public void finish() {
+		System.out.println(Status.FINISHED.statusDescription);
 	}
 	
   /**************************

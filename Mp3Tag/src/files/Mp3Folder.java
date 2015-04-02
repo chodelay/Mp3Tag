@@ -10,23 +10,29 @@ public class Mp3Folder extends File {
 	
 	ArrayList<Mp3File> Mp3Files;
 	int numberOfMp3Files;
-
-	public Mp3Folder(URI path) {
-		super(path);
+	String path;
+	
+	String albumArtist;
+	String artist;
+	String album;
+	
+	public Mp3Folder(String string) {
+		super(string);
+		this.path = string;
 		loadFolder(this);
+		System.out.println("Generated Mp3 Folder from " + path);
 	}
 	
 	private void loadFolder(File folder) {
 		if (folder.exists() && folder.isDirectory()) {
 			Mp3Files = new ArrayList<Mp3File>();
 			
-			for (int i = 0; i < folder.listFiles().length; i++) {
-				File tempFile = new File(folder.list()[i]);
-				if (tempFile.getName().endsWith("mp3")) {
-					Mp3Files.add(new Mp3File(tempFile));
+			for (File f : folder.listFiles()) {
+				if (f.getName().toLowerCase().endsWith("mp3")) {
+					Mp3Files.add(new Mp3File(f.getAbsolutePath()));
 				}
 			}
-			
+					
 			numberOfMp3Files = Mp3Files.size();
 			
 		} else {
@@ -36,6 +42,10 @@ public class Mp3Folder extends File {
 	
 	public int getNumberOfFiles() {
 		return numberOfMp3Files;
+	}
+	
+	public ArrayList<Mp3File> getMp3Files() {
+		return Mp3Files;
 	}
 	
 }
