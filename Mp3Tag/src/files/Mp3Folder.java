@@ -13,14 +13,31 @@ public class Mp3Folder extends File {
 	String path;
 	
 	String albumArtist;
-	String artist;
 	String album;
+	boolean isCompilation;
+	boolean hasMp3Files;
 	
 	public Mp3Folder(String string) {
 		super(string);
 		this.path = string;
 		loadFolder(this);
 		System.out.println("Generated Mp3 Folder from " + path);
+		//IF COMPLETE ALBUM
+		if (numberOfMp3Files > 0) {
+			classifyAlbum();
+		}
+		
+	}
+	
+	private void classifyAlbum() {
+		if (Classifier.isCompilation(this)) {
+			isCompilation = true;
+		} else if (Classifier.hasAllAlbumArtistTags(this)) {
+				albumArtist = Mp3Files.get(0).getAlbumArtist();
+			}
+		if (Classifier.hasAllAlbumTags(this)) {
+			album = Mp3Files.get(0).getAlbum();
+		}
 	}
 	
 	private void loadFolder(File folder) {
@@ -46,6 +63,30 @@ public class Mp3Folder extends File {
 	
 	public ArrayList<Mp3File> getMp3Files() {
 		return Mp3Files;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public String getAlbumArtist() {
+		return albumArtist;
+	}
+
+	public String getAlbum() {
+		return album;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public void setAlbumArtist(String albumArtist) {
+		this.albumArtist = albumArtist;
+	}
+
+	public void setAlbum(String album) {
+		this.album = album;
 	}
 	
 }

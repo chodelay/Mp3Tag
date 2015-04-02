@@ -14,6 +14,16 @@ public class Classifier {
 		return true;
 	}
 	
+	public static boolean hasAllAlbumArtistTags(Mp3Folder folder) {
+		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
+			Mp3File f = folder.getMp3Files().get(i);
+			if (f.getArtist().contentEquals("")) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 //	public static boolean hasNoArtistTags(Mp3Folder folder) {
 //		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
 //			Mp3File f = folder.getMp3Files().get(i);
