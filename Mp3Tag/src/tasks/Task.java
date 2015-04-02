@@ -17,7 +17,7 @@ public class Task {
 		this.path = folder.getPath();
 	}
 
-	public void runTask() {
+	public void run() {
 		
 	}
 	

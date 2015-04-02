@@ -34,4 +34,8 @@ public class Mp3Folder extends File {
 		}
 	}
 	
+	public int getNumberOfFiles() {
+		return numberOfMp3Files;
+	}
+	
 }
