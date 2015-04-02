@@ -12,10 +12,12 @@ public class Mp3Folder extends File {
 	int numberOfMp3Files;
 	String path;
 	
-	String albumArtist;
-	String album;
 	boolean isCompilation;
 	boolean hasMp3Files;
+	String artist;
+	String album;
+	String albumArtist;
+
 	
 	public Mp3Folder(String string) {
 		super(string);
@@ -88,5 +90,5 @@ public class Mp3Folder extends File {
 	public void setAlbum(String album) {
 		this.album = album;
 	}
-	
+
 }

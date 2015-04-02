@@ -1,5 +1,6 @@
 package tasks;
 
+import java.io.File;
 import log.SystemOut;
 import files.Mp3Folder;
 
@@ -44,7 +45,7 @@ public class Task {
 	}
 	
 	public void finish() {
-
+		System.out.println(Status.FINISHED.statusDescription);
 	}
 	
   /**************************

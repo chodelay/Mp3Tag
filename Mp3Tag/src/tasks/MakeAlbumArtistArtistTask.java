@@ -22,5 +22,4 @@ public class MakeAlbumArtistArtistTask extends Task {
 			}
 		}
 	}
-	
 }
