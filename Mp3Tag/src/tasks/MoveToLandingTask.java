@@ -5,6 +5,7 @@ import log.SystemOut;
 import settings.Settings;
 import files.Mp3File;
 import files.Mp3Folder;
+import log.Formatter;
 
 public class MoveToLandingTask extends Task {
 	
@@ -28,8 +29,11 @@ public class MoveToLandingTask extends Task {
 		String fullLandingDirectory = Settings.LANDING_DIRECTORY+"\\"+folder.getAlbumArtist()+"\\"+folder.getAlbum()+"\\";
 		// Move files
 		for (Mp3File f : folder.getMp3Files()) {
-			f.renameTo(new File(fullLandingDirectory+f.getTrack()+" "+f.getTitle()+".mp3"));
-			SystemOut.printDebug("Moving " + f.getAbsolutePath() + " to " + fullLandingDirectory+f.getTrack()+" "+f.getTitle()+".mp3");
+			f.renameTo(new File(
+			    fullLandingDirectory+Formatter.padZeros(f.getTrack(),2)+" "+f.getTitle()+".mp3")
+			);
+			SystemOut.printDebug("Moving " + f.getAbsolutePath() + " to\n"
+			                   + fullLandingDirectory+Formatter.padZeros(f.getTrack(),2)+" "+f.getTitle()+".mp3");
 		}
 	}
 	

@@ -157,7 +157,7 @@ public class Mp3File extends File {
    * TAG FUNCTIONS
    *********************/
   public void writeToFile() {
-  	System.out.println("Writing file" + name);
+  	System.out.println("Writing file " + name);
   	af.setTag(tag);
   	try {
 			af.commit();

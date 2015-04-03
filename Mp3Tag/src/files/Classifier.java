@@ -1,45 +1,36 @@
 package files;
 
 import log.SystemOut;
+import files.Mp3File;
 
 public class Classifier {
 
 	public static boolean hasAllArtistTags(Mp3Folder folder) {
-		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
-			Mp3File f = folder.getMp3Files().get(i);
-			if (f.getArtist().contentEquals("")) {
-				return false;
-			}
+		for (Mp3File f : folder.getMp3Files()) {
+		  if (f.getArtist().isEmpty()) {
+		    SystemOut.printDebug(f.getName() + " has no artist tag.");
+		    return false;
+		  }
 		}
 		return true;
 	}
 	
 
 	public static boolean hasAllAlbumArtistTags(Mp3Folder folder) {
-		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
-			Mp3File f = folder.getMp3Files().get(i);
-			if (f.getArtist().contentEquals("")) {
-				return false;
-			}
-		}
-		return true;
+    for (Mp3File f : folder.getMp3Files()) {
+      if (f.getAlbumArtist().isEmpty()) {
+        SystemOut.printDebug(f.getName() + " has no album artist tag.");
+        return false;
+      }
+    }
+    return true;
 	}
-	
-
-//	public static boolean hasNoArtistTags(Mp3Folder folder) {
-//		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
-//			Mp3File f = folder.getMp3Files().get(i);
-//			if (f.getArtist().contentEquals("")) {
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
 		
 	public static boolean hasAllAlbumTags(Mp3Folder folder) {
 		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
 			Mp3File f = folder.getMp3Files().get(i);
 			if (f.getArtist().contentEquals("")) {
+			  SystemOut.printDebug(f.getName() + " has no album tag.");
 				return false;
 			}
 		}

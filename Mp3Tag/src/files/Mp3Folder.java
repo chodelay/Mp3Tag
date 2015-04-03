@@ -12,13 +12,13 @@ public class Mp3Folder extends File {
 	int numberOfMp3Files;
 	String path;
 	
+	boolean isComplete;
 	boolean isCompilation;
 	boolean hasMp3Files;
 	String artist;
 	String album;
 	String albumArtist;
 
-	
 	public Mp3Folder(String string) {
 		super(string);
 		this.path = string;
@@ -27,16 +27,25 @@ public class Mp3Folder extends File {
 		//IF COMPLETE ALBUM
 		if (numberOfMp3Files > 0) {
 			classifyAlbum();
-		}
-		
+		}		
 	}
 	
 	private void classifyAlbum() {
+	  if (Classifier.isComplete(this)) {
+	    isComplete = true;
+	  } else {
+	    isComplete = false;
+	  }
+	  
 		if (Classifier.isCompilation(this)) {
 			isCompilation = true;
-		} else if (Classifier.hasAllAlbumArtistTags(this)) {
-				albumArtist = Mp3Files.get(0).getAlbumArtist();
-			}
+		}
+    if (Classifier.hasAllArtistTags(this)) {
+      albumArtist = Mp3Files.get(0).getAlbumArtist();
+    }
+		if (Classifier.hasAllAlbumArtistTags(this)) {
+			albumArtist = Mp3Files.get(0).getAlbumArtist();
+		}
 		if (Classifier.hasAllAlbumTags(this)) {
 			album = Mp3Files.get(0).getAlbum();
 		}
@@ -51,8 +60,6 @@ public class Mp3Folder extends File {
 					Mp3Files.add(new Mp3File(f.getAbsolutePath()));
 				}
 			}
-					
-			numberOfMp3Files = Mp3Files.size();
 			
 		} else {
 			//log failure
@@ -77,6 +84,10 @@ public class Mp3Folder extends File {
 
 	public String getAlbum() {
 		return album;
+	}
+	
+	public boolean isCompilation() {
+	  return isCompilation;
 	}
 
 	public void setPath(String path) {
