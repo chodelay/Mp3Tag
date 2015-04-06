@@ -1,26 +1,37 @@
 package tests;
 
-import log.Formatter;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import log.SystemOut;
 import files.*;
+import schedule.Scheduler;
+import settings.Constants;
 import settings.Settings;
-import tasks.MakeAlbumArtistArtistTask;
-import tasks.MoveToLandingTask;
-import tasks.RemoveJunkTask;
-import tasks.Task;
 
 public class Test {
 	
+	static boolean exit = false;
+	
 	public static void main(String[] args) {
-		Mp3Folder f = new Mp3Folder(Settings.SCAN_DIRECTORY);
+		// LOAD SETTINGS FILE
+		try {
+			Settings.initializeSettings();
+		} catch (FileNotFoundException e) {
+			SystemOut.printDebug("Settings file not found. Terminating.");
+			exit = true;
+		}
 		
-		Task t = new RemoveJunkTask(f);
-		t.run();
+		Constants.setOSConstants();
 		
-		Task t2 = new MakeAlbumArtistArtistTask(f);
-		t2.run();
+		// Scan Scan Directory and Subdirectories
+		if (!exit) {
+			FolderScanner fs = new FolderScanner(new File(Settings.SCAN_DIRECTORY));
+		}
 		
-		Task t3 = new MoveToLandingTask(f);
-		t3.run();
+		while (Scheduler.hasTasks()) {
+			Scheduler.runTasks();
+		}
 	}
 	
 }

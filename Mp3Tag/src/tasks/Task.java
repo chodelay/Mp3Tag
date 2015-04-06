@@ -1,6 +1,5 @@
 package tasks;
 
-import java.io.File;
 import log.SystemOut;
 import files.Mp3Folder;
 
@@ -35,9 +34,9 @@ public class Task {
 	}
 
 	public void run() {
-		System.out.println(Status.RUNNING.statusDescription + " " + this.name);
+		System.out.println("++" + Status.RUNNING.statusDescription + " " + this.name);
 		this.runTask();
-		System.out.println(Status.FINISHED.statusDescription + " " + this.name);
+		System.out.println("--" + Status.FINISHED.statusDescription + " " + this.name);
 	}
 	
 	protected void runTask() {

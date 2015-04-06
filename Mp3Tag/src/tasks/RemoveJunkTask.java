@@ -1,8 +1,5 @@
 package tasks;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import files.Mp3File;
 import files.Mp3Folder;
 
