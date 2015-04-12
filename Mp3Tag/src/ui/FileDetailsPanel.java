@@ -6,6 +6,11 @@ import javax.swing.JTextArea;
 
 public class FileDetailsPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+  private static final long serialVersionUID = 1L;
+
 	Mp3File file;
 	
 	//Label Text Areas
