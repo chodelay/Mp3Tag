@@ -18,8 +18,8 @@ public class FolderScanner {
 		for (File f : folder.listFiles()) {
 			if (f.isDirectory()) {
 				new FolderScanner(f);
-			} else if (new Mp3Folder(f.getAbsolutePath()).hasMp3Files) {
-				TaskDecider.createJobs(new Mp3Folder(f.getAbsolutePath()));
+			} else if (f.getName().toLowerCase().endsWith("mp3")) {
+				TaskDecider.createJobs(new Mp3Folder(f.getParent()));
 			}
 		}
 	}

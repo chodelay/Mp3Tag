@@ -12,9 +12,7 @@ public class Classifier {
 	boolean hasAnyArtistTags;			boolean hasAnyAlbumArtistTags;
 	boolean hasAnyAlbumTags;			boolean hasAnyTrackTags;
 	boolean hasAnyYearTags;				boolean hasAnyGenreTags;
-	
 
-	
 	public Classifier(Mp3Folder f) {
 		hasAllArtistTags = hasAllArtistTags(f);
 		hasAllAlbumArtistTags = hasAllAlbumArtistTags(f);
@@ -158,21 +156,21 @@ public class Classifier {
 		return false;
 	}
 
-	
-	
-	
 	public boolean isCompilation(Mp3Folder folder) {
+		int numberOfFiles = folder.getNumberOfFiles();
 		SystemOut.printDebug("Analysing " + folder.getAbsolutePath() + " to check if compilation");
 		int certainty = 0;
-		for (int i = 0; i < folder.getNumberOfFiles(); i++) {
+		for (int i = 0; i < numberOfFiles; i++) {
 			Mp3File f = folder.getMp3Files().get(i);
 			if (f.getArtist().contentEquals(f.getAlbumArtist())) {
 				certainty++;
 			}
 		}
-		if (certainty <= folder.getNumberOfFiles()/3) {
+		if (numberOfFiles < 3 || certainty <= numberOfFiles/3) {
+			SystemOut.printDebug(folder.getAbsolutePath() + " is not a compilation. Certainty: " + certainty + "/" + numberOfFiles);
 			return false;
 		} else {
+			SystemOut.printDebug(folder.getAbsolutePath() + " is a compilation. Certainty: " + certainty + "/" + numberOfFiles);
 			return true;
 		}
 	}

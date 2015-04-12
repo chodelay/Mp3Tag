@@ -28,7 +28,7 @@ public class TaskDecider {
     // Remove junk tags
     Scheduler.addTask(new RemoveJunkTask(f));
     
-    if (!(hasAllArtistTags && hasAllAlbumArtistTags)) {
+    if (hasAllArtistTags && hasAllAlbumArtistTags) {
     
     // If has all album artist tags but not all artist
     	// make all artist tags = to albumartist
@@ -40,6 +40,8 @@ public class TaskDecider {
     	Scheduler.addTask(new MakeArtistSameTask(f));
     	Scheduler.addTask(new MakeAlbumArtistSameTask(f));
     }
+    
+    Scheduler.addTask(new MoveToLandingTask(f));
     // If Year Missing
     
     

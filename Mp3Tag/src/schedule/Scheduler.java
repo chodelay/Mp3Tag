@@ -7,7 +7,7 @@ import tasks.Task;
 
 public class Scheduler {
 	
-	static ArrayList<Task> Tasks;
+	static ArrayList<Task> Tasks = new ArrayList<Task>();
 	
   public static void addTask(Task task) {
     Tasks.add(task);
@@ -23,12 +23,12 @@ public class Scheduler {
     for (Task t: Tasks) {
     	SystemOut.printDebug("Scheduler is launching: " + t.getName());
       t.run();
-      Tasks.remove(t);
     }
+    Tasks = new ArrayList<Task>();
   }
   
   public static boolean hasTasks() {
-  	return !(Tasks.size() == 0) && Tasks != null;
+  	return Tasks != null && !(Tasks.size() == 0);
   }
 	
 	// TIMERS

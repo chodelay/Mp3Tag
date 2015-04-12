@@ -37,6 +37,7 @@ public class FileDetailsPanel extends JPanel {
 		discValue = new JTextArea();
 		yearValue = new JTextArea();
 		commentValue = new JTextArea();
+		
 		this.add(artistLabel);		this.add(albumArtistLabel);
 		this.add(albumLabel);			this.add(titleLabel);
 		this.add(trackLabel);			this.add(discLabel);

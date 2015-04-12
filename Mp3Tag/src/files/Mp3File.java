@@ -18,7 +18,8 @@ public class Mp3File extends File {
 	private static final long serialVersionUID = -1474248911769075890L;
 	String name;
 	AudioFile af;
-	Tag tag;					Tag originalTag;
+	Tag tag;
+	Tag originalTag;
 
   public Mp3File(String path) {
   	super(path);
@@ -49,7 +50,6 @@ public class Mp3File extends File {
   
   /**************************
    * MUTATORS
-
    *************************/
   public void setArtist(String input) {
   	try {

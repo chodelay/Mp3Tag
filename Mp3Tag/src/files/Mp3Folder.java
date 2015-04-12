@@ -41,11 +41,12 @@ public class Mp3Folder extends File {
 	}
 	
 	private void classify(Classifier cl) {
-		
-
-		if (cl.isCompilation(this)) {
+		isCompilation = cl.isCompilation(this);
 		
 			if (cl.hasAllAlbumArtistTags) {
+				albumArtist = Mp3Files.get(0).getAlbumArtist();
+			}
+			if (cl.hasAllArtistTags) {
 				albumArtist = Mp3Files.get(0).getAlbumArtist();
 			}
 			if (cl.hasAllAlbumTags) {
@@ -53,8 +54,8 @@ public class Mp3Folder extends File {
 			}
 			if (cl.hasAnyAlbumArtistTags) {
 				for (Mp3File f : Mp3Files) {
-					if (!f.getArtist().isEmpty() && artist.isEmpty()) {
-						albumArtist = f.getArtist();
+					if (!f.getAlbumArtist().isEmpty() && albumArtist.isEmpty()) {
+						albumArtist = f.getAlbumArtist();
 					}
 				}
 			}
@@ -67,12 +68,12 @@ public class Mp3Folder extends File {
 			}
 			if (cl.hasAnyAlbumTags) {
 				for (Mp3File f : Mp3Files) {
-					if (!f.getArtist().isEmpty() && artist.isEmpty()) {
+					if (!f.getAlbum().isEmpty() && album.isEmpty()) {
 						album = f.getAlbum();
 					}
 				}
 			}
-		}
+		
 	}
 	
 	private void loadFolder(File folder) {
